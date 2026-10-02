@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="ru"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alex's Cube's</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+
+<div id="authScreen" class="screen active"><div class="card"><div class="logo">Alex's Cube's</div>
+<div class="tabs"><button type="button" class="tab active" data-tab="login">Вход</button><button type="button" class="tab" data-tab="register">Регистрация</button></div>
+<form id="loginForm" class="form active"><label>Имя</label><input type="text" id="loginUsername" required><label>Пароль</label><input type="password" id="loginPassword" required><button type="submit" class="btn">Войти</button><button type="button" id="guestBtn" class="btn btn-guest">Войти как гость</button></form>
+<form id="registerForm" class="form"><label>Имя</label><input type="text" id="regUsername" required><label>Пароль</label><input type="password" id="regPassword" required><label>Повтор</label><input type="password" id="regPassword2" required><button type="submit" class="btn">Зарегистрироваться</button></form>
+<div id="message" class="message"></div><div class="footer">© 2026 Alex's Cube's</div></div></div>
+
+<div id="loadingScreen" class="screen"><div class="spinner"></div><div class="loading-text">Loading...</div></div>
+
+<div id="homeScreen" class="screen">
+<header class="topbar"><div class="brand">Alex's Cube's</div>
+<nav class="nav">
+<button class="nav-btn active" data-page="home">Home</button>
+<button class="nav-btn" data-page="shop">Shop</button>
+<button class="nav-btn" data-page="create">Create</button>
+<button class="nav-btn" data-page="avatar">My Avatar</button>
+<button class="nav-btn exit" id="exitBtn">Exit</button></nav>
+<div class="robux-pill">T-100</div></header>
+<main class="content">
+<section class="page active" data-page-content="home"><div class="home-wrap">
+<aside class="ad-left">PLAY NOW!</aside>
+<section class="center-col"><div class="greeting-row"><div class="avatar-box"><div id="homeAvatarCanvas" style="width:100%;height:100%"></div></div><div class="greeting-text"><h2>Welcome: <span id="playerName">Player</span></h2></div></div>
+<div class="section-head"><h3>Friends</h3></div><div class="friends-row" id="homeFriendsRow"></div>
+<div class="section-head"><h3>Games</h3></div><div class="home-games-row" id="homeGamesRow"></div></section>
+<aside class="ad-right">BE A MAN<br>AMONG MEN</aside></div></section>
+
+<section class="page" data-page-content="shop"><div class="shop-wrap">
+<div class="shop-left"><div class="shop-balance">💰 Баланс: <span id="shopBalance">T-100</span></div></div>
+<div class="shop-right"><div class="shop-cats">
+<button class="shop-cat active" data-cat="shirt">Shirt's</button>
+<button class="shop-cat" data-cat="pants">Pant's</button>
+<button class="shop-cat" data-cat="face">Face's</button>
+<button class="shop-cat" data-cat="hat">Hat's</button>
+<button class="shop-cat" data-cat="pet">Pet's</button></div>
+<div class="shop-items"><div class="shop-grid" id="shopItemsGrid"></div><div class="shop-empty" id="shopEmpty">Пока нет товаров</div></div></div></div></section>
+
+<section class="page" data-page-content="create"><div class="create-wrap"><div class="create-header"><h1>Create <span class="count" id="gamesCount">0</span></h1><div>
+<button class="btn-create" id="makeClothingBtn" style="background:#9b59b6">+ Clothing</button>
+<button class="btn-create" id="makeHatBtn" style="background:#e67e22">+ Hat</button>
+<button class="btn-create" id="makeModelBtn" style="background:#8b5cf6">+ Model</button>
+<button class="btn-create" id="createGameBtn">+ Game</button></div></div><div class="games-grid" id="gamesContainer"></div></div></section>
+
+<section class="page" data-page-content="avatar"><div class="create-wrap"><h1>My Avatar</h1>
+<div class="myavatar-container"><div class="myavatar-viewport" id="myAvatarViewport"></div>
+<div class="myavatar-info"><h2 id="myAvatarName">Player</h2>
+<div class="avatar-tabs">
+<button class="avatar-tab active" data-tab="shirt">👕 Майки</button>
+<button class="avatar-tab" data-tab="pants">👖 Штаны</button>
+<button class="avatar-tab" data-tab="face">😊 Лица</button>
+<button class="avatar-tab" data-tab="hat">🎩 Шляпа 1</button>
+<button class="avatar-tab" data-tab="hat2">🎩 Шляпа 2</button>
+<button class="avatar-tab" data-tab="hat3">🎩 Шляпа 3</button>
+<button class="avatar-tab" data-tab="pet">🐾 Питомец</button>
+</div><div id="myAvatarList"></div></div></div></div></section>
+</main></div>
+
+<div id="editorScreen" class="screen">
+<div class="studio-topbar"><div class="studio-logo">◆ ALEX STUDIO</div>
+<div class="studio-menu"><button class="studio-menu-btn">Файл</button><button class="studio-menu-btn">Правка</button><button class="studio-menu-btn">Вид</button></div>
+<div class="studio-topbar-right"><span class="studio-user">👤 <span id="studioUser">Player</span></span></div></div>
+<div class="studio-ribbon"><div class="studio-tabs">
+<button class="studio-tab active" data-ribbon="home">🏠 Главная</button>
+<button class="studio-tab" data-ribbon="model">🧱 Модель</button>
+<button class="studio-tab" data-ribbon="test">▶ Тест</button>
+<button class="studio-tab" data-ribbon="ui">🖼 Интерфейс</button>
+<button class="studio-tab" data-ribbon="inter">🖐 Взаимодействия</button>
+</div></div>
+<div class="editor-toolbar">
+<div class="ribbon-panel active" data-ribbon-panel="home"><div class="rb-group"><span class="rb-label">Инструменты</span><div class="rb-row">
+<button class="tbtn tool active" data-tool="select">🖱 Select</button>
+<button class="tbtn tool" data-tool="translate">↔ Move</button>
+<button class="tbtn tool" data-tool="rotate">🔄 Rotate</button>
+<button class="tbtn tool" data-tool="scale">⤢ Scale</button></div></div>
+<div class="rb-group"><span class="rb-label">Файл</span><div class="rb-row">
+<button class="tbtn save" id="editorSaveBtn">💾 Сохранить</button>
+<button class="tbtn exit" id="editorExitBtn">← Выйти</button></div></div></div>
+
+<div class="ribbon-panel" data-ribbon-panel="model"><div class="rb-group"><span class="rb-label">Быстро</span><div class="rb-row">
+<button class="tbtn add" data-add="block">◼ Блок</button>
+<button class="tbtn add" data-add="sphere">● Сфера</button>
+<button class="tbtn add" data-add="cylinder">▮ Цилиндр</button>
+<button class="tbtn add" data-add="cone">▲ Конус</button>
+<button class="tbtn add spawn" data-add="spawn">🚩 Спавн</button>
+<button class="tbtn add character" data-add="character">👤 Персонаж</button></div></div>
+<div class="rb-group"><span class="rb-label">Библиотека</span><div class="rb-row">
+<button class="tbtn" id="openModelEditorBtn" style="background:#8b5cf6">📝 Редактор моделей</button>
+<button class="tbtn" id="addModelBtn" style="background:#f59e0b">🧊 + Модель</button></div></div>
+<div class="rb-group"><span class="rb-label">Действия</span><div class="rb-row">
+<button class="tbtn" id="editorDupBtn">📋 Дублировать</button>
+<button class="tbtn clear" id="clearAllBtn">🗑 Очистить</button></div></div></div>
+
+<div class="ribbon-panel" data-ribbon-panel="test"><div class="rb-group"><span class="rb-label">Запуск</span><div class="rb-row">
+<button class="tbtn play big" id="editorPlayBtn">▶ Играть</button></div></div></div>
+
+<div class="ribbon-panel" data-ribbon-panel="ui"><div class="rb-group"><span class="rb-label">Базовые</span><div class="rb-row">
+<button class="tbtn" data-guiadd="screen" style="background:#7c3aed">🖥 Экран</button>
+<button class="tbtn" data-guiadd="frame" style="background:#6d28d9">▢ Рамка</button>
+<button class="tbtn" data-guiadd="label" style="background:#4c1d95">🅣 Текст</button>
+<button class="tbtn" data-guiadd="button" style="background:#22c55e">🔘 Кнопка</button>
+<button class="tbtn" data-guiadd="image" style="background:#0ea5e9">🖼 Картинка</button></div></div>
+<div class="rb-group"><span class="rb-label">Продвинутые</span><div class="rb-row">
+<button class="tbtn" data-guiadd="circle" style="background:#ec4899">● Круг</button>
+<button class="tbtn" data-guiadd="input" style="background:#eab308">⌨ Ввод</button>
+<button class="tbtn" data-guiadd="toggle" style="background:#16a34a">🎚 Перекл.</button>
+<button class="tbtn" data-guiadd="progress" style="background:#0891b2">▰ Полоса</button>
+<button class="tbtn" data-guiadd="icon" style="background:#ca8a04">⭐ Иконка</button></div></div></div>
+
+<div class="ribbon-panel" data-ribbon-panel="inter"><div class="rb-group"><span class="rb-label">E-шаблоны</span><div class="rb-row">
+<button class="tbtn" data-inter="chest">📦 Сундук</button>
+<button class="tbtn" data-inter="npc">🧙 NPC</button>
+<button class="tbtn" data-inter="shop">🛒 Магазин</button>
+<button class="tbtn" data-inter="portal">🌀 Портал</button>
+<button class="tbtn" data-inter="lever">🎚 Рычаг</button>
+<button class="tbtn" data-inter="sign">📜 Табличка</button>
+<button class="tbtn" data-inter="save">💾 Точка</button>
+<button class="tbtn" data-inter="bed">🛏 Кровать</button>
+</div></div>
+<div class="rb-group"><span class="rb-label">Автоскрипты</span><div class="rb-row">
+<button class="tbtn" id="clearInterScriptBtn">🗑 Очистить скрипт</button></div></div></div>
+</div>
+
+<div class="quick-bar"><span class="qb-label">🎮 Быстрые:</span>
+<button class="qb-btn" data-quick="teleport"><span>🚀</span>Телепорт</button>
+<button class="qb-btn" data-quick="killBrick"><span>💀</span>Убийца</button>
+<button class="qb-btn" data-quick="bounce"><span>🦘</span>Батут</button>
+<button class="qb-btn" data-quick="lava"><span>🔥</span>Лава</button></div>
+
+<div class="editor-main">
+<aside class="explorer-panel"><h4>Проводник</h4><div class="tree"><div id="explorerChildren"></div></div></aside>
+<div class="viewport" id="viewport"><div class="viewport-hint">WASD · QE · Shift</div><div class="gui-preview" id="guiPreview"></div></div>
+<aside class="props-panel"><h4>Свойства</h4><div id="propsContent"><p class="no-sel">Ничего не выбрано</p></div></aside>
+</div>
+<div class="studio-statusbar"><span id="editorGameName">Готов к работе</span><span>Alex Studio v2.0</span></div>
+</div>
+
+<div id="hatEditorScreen" class="screen"><div class="editor-topbar">
+<button class="tbtn exit" id="hatExitBtn">← Exit</button>
+<div class="title">Шляпа: <span id="hatTitleLabel">My Hat</span></div>
+<input type="text" id="hatName" value="My Hat" class="clothing-name-input">
+<label class="price-label">Цена: <input type="number" id="hatPrice" value="0" min="0" style="width:70px"></label>
+<button class="tbtn" id="hatClearBtn">🧹</button><button class="tbtn save" id="hatSaveBtn">💾 Save</button></div>
+<div class="editor-toolbar">
+<button class="tbtn hat-tool active" data-htool="translate">Move</button>
+<button class="tbtn hat-tool" data-htool="rotate">Rotate</button>
+<button class="tbtn hat-tool" data-htool="scale">Scale</button>
+<span class="sep"></span>
+<button class="tbtn hat-add" data-hadd="box">+Куб</button>
+<button class="tbtn hat-add" data-hadd="sphere">+Сфера</button>
+<button class="tbtn hat-add" data-hadd="cylinder">+Цил</button>
+<button class="tbtn hat-add" data-hadd="cone">+Конус</button>
+<span class="sep"></span>
+<button class="tbtn" id="hatDupBtn">Dup</button>
+<button class="tbtn clear" id="hatDelBtn">🗑</button>
+<label style="color:#cfd6e2;font-size:12px">Голова: <input type="range" id="hatHeadSize" min="30" max="150" value="100" style="width:90px"></label></div>
+<div class="editor-main"><div class="viewport" id="hatViewport" style="background:#2a2a2a"></div>
+<div class="clothing-tools" style="flex:0 0 140px"><input type="color" id="hatColor" value="#ff0000" style="width:100%;height:36px"><div class="ctool-colors" id="hatColors"></div></div>
+<aside class="props-panel" style="flex:0 0 240px"><h4>Свойства</h4><div id="hatProps"><p class="no-sel">Ничего не выбрано</p></div></aside></div></div>
+
+<div id="clothingTypeScreen" class="screen"><div class="ctype-wrap">
+<h1 class="ctype-title">Make a Clothing</h1>
+<button class="ctype-btn" id="ctypeFaceBtn">Make a Face</button>
+<button class="ctype-btn" id="ctypeShirtBtn">Make a Shirt</button>
+<button class="ctype-btn" id="ctypePantsBtn">Make a Pants</button></div>
+<button class="ctype-exit" id="ctypeExitBtn">← Back</button></div>
+
+<div id="clothingEditorScreen" class="screen" style="flex-direction:column;background:#1e1e1e;color:#ddd">
+<div class="clothing-topbar"><button class="tbtn exit" id="clothingExitBtn">← Exit</button>
+<div class="clothing-title">Делаем: <span id="clothingTitleType">Shirt</span></div>
+<input type="text" id="clothingName" class="clothing-name-input" value="My Shirt">
+<label class="price-label">Цена: <input type="number" id="clothingPrice" value="0" min="0" style="width:70px"></label>
+<button class="tbtn" id="clothingClearBtn">🧹</button><button class="tbtn save" id="clothingSaveBtn">💾 Save</button></div>
+<div class="part-tabs" id="partTabs"></div><div class="face-tabs" id="faceTabs"></div>
+<div class="clothing-main"><div class="clothing-viewport" id="clothingViewport"></div>
+<div class="clothing-tools">
+<button class="ctool active" data-ctool="brush">🖌</button>
+<button class="ctool" data-ctool="eraser">🧽</button>
+<button class="ctool" data-ctool="picker">💧</button>
+<button class="ctool" data-ctool="fill">🪣</button>
+<input type="color" id="clothingColor" value="#ff0000"><div class="ctool-colors" id="ctoolColors"></div></div>
+<div class="clothing-canvas-wrap"><canvas id="clothingCanvas" width="32" height="32" style="width:320px;height:320px"></canvas></div></div></div>
+
+<div id="playScreen" class="screen">
+<div class="play-topbar"><button class="play-btn exit" id="playExitBtn">← Exit</button>
+<div class="play-title">🎮 <span id="playTitle">Game</span></div>
+<div id="playBalance" style="background:rgba(255,255,255,.15);padding:6px 14px;border-radius:20px;font-weight:bold;font-size:13px">💰 100 T</div>
+<div id="playPetBtn" style="background:#8b5cf6;padding:6px 14px;border-radius:20px;font-weight:bold;font-size:13px;cursor:pointer">🐾 Питомцы</div>
+</div>
+<div class="play-viewport" id="playViewport">
+<div class="play-hud">
+<div class="players-badge" id="playersBadge">Players: 1</div>
+<div class="play-hint">WASD · Space · Shift · E — взаимодействие · F — питомец</div>
+<div class="chat-panel"><div class="chat-log" id="chatLog"></div></div>
+</div>
+<div id="playGui"></div>
+</div></div>
+
+<div id="modelEditorScreen" class="screen">
+<div class="mdl-toolbar">
+<button class="tbtn exit" id="mdlExitBtn">← Назад</button>
+<div style="font-weight:900;flex:1">🧊 Редактор моделей</div>
+<input type="text" id="mdlName" value="Моя модель" class="clothing-name-input">
+<label class="price-label" style="color:#cfd6e2">Это питомец <input type="checkbox" id="mdlIsPet" style="vertical-align:middle"></label>
+<label class="price-label">Цена: <input type="number" id="mdlPrice" value="0" min="0" style="width:70px"></label>
+<button class="tbtn" id="mdlLoadBtn">📂 Загрузить</button>
+<button class="tbtn save" id="mdlSaveBtn">💾 Сохранить</button>
+</div>
+<div class="mdl-main">
+<div class="mdl-viewport" id="mdlViewport"></div>
+<div class="mdl-side">
+<h4>Шаблоны</h4>
+<div class="mdl-presets" id="mdlPresets"></div>
+<h4>Части модели</h4>
+<div class="mdl-part-list" id="mdlPartList"></div>
+<div class="mdl-add-row">
+<button data-addpart="box">+Куб</button>
+<button data-addpart="sphere">+Сфера</button>
+<button data-addpart="cylinder">+Цилиндр</button>
+<button data-addpart="cone">+Конус</button>
+</div>
+<div id="mdlPartProps"><p style="color:#5a6373;font-style:italic;font-size:12px;text-align:center;padding:12px">Выбери часть</p></div>
+<h4>🎬 Превью анимации</h4>
+<select id="mdlAnimPreview" class="mdl-script" style="height:auto;padding:6px">
+<option value="idle">Стоит</option><option value="walk">Идёт</option><option value="run">Бежит</option>
+<option value="jump">Прыгает</option><option value="sit">Сидит</option><option value="sleep">Спит</option>
+<option value="dance">Танцует</option><option value="spin">Крутится</option><option value="backflip">Сальто</option>
+<option value="wagTail">Хвост виляет</option><option value="sad">Грустит</option><option value="happy">Радуется</option>
+<option value="attack">Атака</option><option value="wave">Машет</option><option value="point">Показывает</option>
+</select>
+<h4>💬 Скрипт (на E)</h4>
+<textarea id="mdlScript" class="mdl-script" spellcheck="false">api.chat("Привет!"); api.sound();</textarea>
+</div></div></div>
+
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TransformControls.js"></script>
+<script src="game.js"></script>
+</body></html>
